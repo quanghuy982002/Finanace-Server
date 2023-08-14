@@ -1,0 +1,25 @@
+server:
+  port: 8087
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: none
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/db.changelog-root.xml
+
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+
+  profiles:
+#    active: dev
+    active: local
+
