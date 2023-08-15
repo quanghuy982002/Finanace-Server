@@ -1,6 +1,6 @@
 
 l
-<application/src/main/java/org/example/FinaceApplication.java,8\9\89df1cd8a2280a61c1318d12843be13177bf885f
+<application/src/main/java/org/example/FinanceApplication.java,8\9\89df1cd8a2280a61c1318d12843be13177bf885f
 m
 =infrastructure/src/main/java/org/example/dto/PageRequest.java,6\2\62642002de900cbeeec298c85af0039c91f9532b
 k
