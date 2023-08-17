@@ -14,12 +14,12 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-boot.version>2.6.3</spring-boot.version>
-        <liquibase.version>4.7.1</liquibase.version>
+        <spring-boot.version>2.7.14</spring-boot.version>
+        <liquibase.version>4.23.1</liquibase.version>
         <bom.version>1.0-SNAPSHOT</bom.version>
-        <springframework.version>5.3.15</springframework.version>
+        <springframework.version>5.3.29</springframework.version>
         <springdoc.version>1.6.6</springdoc.version>
-        <jackson.version>2.13.2</jackson.version>
+        <jackson.version>2.15.2</jackson.version>
         <openfeign.version>3.1.1</openfeign.version>
     </properties>
 
