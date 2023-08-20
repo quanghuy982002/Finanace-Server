@@ -6,9 +6,14 @@
     <changeSet id="initial.01" author="giangnt123">
         <sqlFile path="/db/sql/example.sql"/>
     </changeSet>
+
     <changeSet id="20230813.01" author="giangnt123">
         <sql>
             ALTER TABLE example MODIFY COLUMN id int(11) auto_increment NOT NULL;
         </sql>
+    </changeSet>
+
+    <changeSet id="20082023.01" author="quanghuy98">
+        <sqlFile path="/db/sql/customer.sql"/>
     </changeSet>
 </databaseChangeLog>
