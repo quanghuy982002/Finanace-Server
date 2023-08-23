@@ -21,12 +21,12 @@ public class CommonException extends RuntimeException {
         this.status = status;
     }
 
-    public CommonException(String code, @Nullable String ...args) {
+    public CommonException(String code, @Nullable String... args) {
         this.code = code;
         this.args = args;
     }
 
-    public CommonException(@Nullable HttpStatus status, String code, @Nullable String ...args) {
+    public CommonException(@Nullable HttpStatus status, String code, @Nullable String... args) {
         this.code = code;
         this.args = args;
         this.status = status;

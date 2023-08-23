@@ -33,13 +33,13 @@ public class ExampleEntity {
     @Column(name = "created_time", nullable = false, insertable = false)
     private LocalDateTime createdTime;
 
-    @Column(name = "updated_by", length = 255)
-    private String updatedBy;
 
     @LastModifiedDate
     @Column(name = "updated_time", nullable = true)
     private LocalDateTime updatedTime;
 
+    @Column(name = "updated_by", length = 255)
+    private String updatedBy;
 //    @Column(name = "delete_by", length = 255)
 //    private String deletedBy;
 

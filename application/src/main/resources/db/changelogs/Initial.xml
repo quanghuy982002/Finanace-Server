@@ -9,11 +9,40 @@
 
     <changeSet id="20230813.01" author="giangnt123">
         <sql>
-            ALTER TABLE example MODIFY COLUMN id int(11) auto_increment NOT NULL;
+            ALTER TABLE example MODIFY COLUMN id int (11) auto_increment NOT NULL;
         </sql>
     </changeSet>
 
     <changeSet id="20082023.01" author="quanghuy98">
         <sqlFile path="/db/sql/customer.sql"/>
     </changeSet>
+
+    <changeSet id="21082023.01" author="quanghuy98">
+        <sql>
+            ALTER TABLE customer_detail
+                ADD note text;
+        </sql>
+    </changeSet>
+
+    <changeSet id="21082023.02" author="quanghuy98">
+        <addColumn tableName="customer">
+            <column name="created_time" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_time" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="21082023.03" author="quanghuy98">
+        <addColumn tableName="customer_detail">
+            <column name="created_time" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_time" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="21082023.04" author="quanghuy98">
+        <addColumn tableName="representative">
+            <column name="created_time" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_time" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

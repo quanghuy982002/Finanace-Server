@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ExampleRepository extends JpaRepository<ExampleEntity,Integer> {
+public interface ExampleRepository extends JpaRepository<ExampleEntity, Integer> {
     @Query("SELECT  ex FROM ExampleEntity ex WHERE ex.name like  %:#{#request.name}% ")
     Page<ExampleEntity> searchExample(@Param("request") ExampleSearchRequest request, Pageable pageable);
 }

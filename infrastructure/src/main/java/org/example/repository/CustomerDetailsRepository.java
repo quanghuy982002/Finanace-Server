@@ -1,6 +1,5 @@
 package org.example.repository;
 
-import org.example.dto.CustomerDetailsDTO;
 import org.example.entity.Customer;
 import org.example.entity.CustomerDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
