@@ -2,8 +2,7 @@ package org.example.dto;
 
 import java.util.List;
 
-public class CustomerDetailsDTO extends CustomerDTO
-{
+public class CustomerDetailsDTO extends CustomerDTO {
     private String phoneNumber;
     private String taxId;
     private String email;
@@ -12,6 +11,8 @@ public class CustomerDetailsDTO extends CustomerDTO
     private String bankAccountNumber;
     private String bankName;
     private String bankBranch;
+
+    private String note;
     private List<RepresentativeDTO> representatives;
 
     public CustomerDetailsDTO() {
@@ -87,5 +88,13 @@ public class CustomerDetailsDTO extends CustomerDTO
 
     public void setRepresentatives(List<RepresentativeDTO> representatives) {
         this.representatives = representatives;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

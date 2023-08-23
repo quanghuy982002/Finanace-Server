@@ -7,7 +7,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class PageResponse<T> extends Response<List<T>>{
+public class PageResponse<T> extends Response<List<T>> {
     private long totalRecord;
 
     public PageResponse() {

@@ -51,7 +51,7 @@ public class ExampleServiceImpl implements ExampleService {
      */
     @Override
     public Response<ExampleEntity> updateExample(ExampleRequest request) {
-        if (request.getId() == null){
+        if (request.getId() == null) {
             throw new CommonException(HttpStatus.BAD_REQUEST, "Bắt buột nhập id");
         }
         ExampleEntity exampleEntity = exampleRepository.findById(request.getId())

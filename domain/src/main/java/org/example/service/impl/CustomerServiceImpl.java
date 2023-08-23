@@ -2,6 +2,7 @@ package org.example.service.impl;
 
 import org.example.dto.CustomerDTO;
 import org.example.dto.CustomerDetailsDTO;
+import org.example.dto.PageResponse;
 import org.example.dto.RepresentativeDTO;
 import org.example.entity.Customer;
 import org.example.entity.CustomerDetails;
@@ -9,8 +10,10 @@ import org.example.entity.Representative;
 import org.example.repository.CustomerDetailsRepository;
 import org.example.repository.CustomerRepository;
 import org.example.repository.RepresentativeRepository;
+import org.example.request.CustomerSearchRequest;
 import org.example.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +24,6 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerDetailsRepository customerDetailsRepository;
     private final RepresentativeRepository representativeRepository;
-
     @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository,
                                CustomerDetailsRepository customerDetailsRepository,
@@ -32,17 +34,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     //    modelMapper
-    private CustomerDTO mapToDTO(Customer customer) {
-        CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setId(customer.getId());
-        customerDTO.setCode(customer.getCode());
-        customerDTO.setName(customer.getName());
-        customerDTO.setGroupName(customer.getGroupName());
-        customerDTO.setStatus(customer.getStatus());
-        customerDTO.setAvatarImage(customer.getAvatarImage());
-        return customerDTO;
-    }
-
     private Customer mapToEntity(CustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setId(customerDTO.getId());
@@ -52,6 +43,16 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setStatus(customerDTO.getStatus());
         customer.setAvatarImage(customerDTO.getAvatarImage());
         return customer;
+    }
+
+    @Override
+    public PageResponse<Customer> searchCustomerByCode(CustomerSearchRequest request) {
+        request.setCode(request.getCode().isEmpty() ? null : request.getCode());
+        request.setName(request.getName().isEmpty() ? null : request.getName());
+//        long totalRecords = customerRepository.count();
+//        request.setSize((int) totalRecords);
+        Page<Customer> page = customerRepository.searchCustomerByCodeAndName(request, request.getPageable());
+        return new PageResponse<>(page.getContent(), page.getTotalElements());
     }
 
     @Override
@@ -80,6 +81,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return mapToCustomerDetailsDTO(customer);
     }
+
 
     private CustomerDetailsDTO mapToCustomerDetailsDTO(Customer customer) {
         CustomerDetails customerDetails = customerDetailsRepository.findByCustomer(customer);
@@ -114,39 +116,10 @@ public class CustomerServiceImpl implements CustomerService {
             representativeDTO.setAvatarImage(representative.getAvatarImage());
             representativeDTOs.add(representativeDTO);
         }
+        detailsDTO.setNote(customerDetails.getNote());
         detailsDTO.setRepresentatives(representativeDTOs);
 
         return detailsDTO;
     }
 
-//    @Override
-//    public CustomerDTO getCustomerById(int id) {
-//        Optional<Customer> customerOptional = customerRepository.findById(id);
-//        return customerOptional.map(this::mapToDTO).orElse(null);
-//    }
-
-//    @Override
-//    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-//        Customer customer = mapToEntity(customerDTO);
-//        customer = customerRepository.save(customer);
-//        return mapToDTO(customer);
-//    }
-//
-//    @Override
-//    public CustomerDTO updateCustomer(int id, CustomerDTO customerDTO) {
-//        Optional<Customer> customerOptional = customerRepository.findById(id);
-//        if (customerOptional.isPresent()) {
-//            Customer customerToUpdate = customerOptional.get();
-//            customerToUpdate.setCode(customerDTO.getCode());
-//            customerToUpdate.setName(customerDTO.getName());
-//            customerToUpdate = customerRepository.save(customerToUpdate);
-//            return mapToDTO(customerToUpdate);
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public void deleteCustomer(int id) {
-//        customerRepository.deleteById(id);
-//    }
 }

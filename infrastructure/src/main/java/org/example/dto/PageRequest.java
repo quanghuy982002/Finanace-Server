@@ -15,7 +15,7 @@ public class PageRequest {
     private static final String DEFAULT_FIELD_SORT = "id";
 
     private int page = 1;
-    private int size = 20;
+    private int size = 100;
     private String keyword;
 
     private List<String> sorts;

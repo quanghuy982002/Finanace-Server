@@ -1,7 +1,6 @@
 package org.example.dto;
 
-public class CustomerDTO
-{
+public class CustomerDTO {
     private Long id;
 
     private String code;
@@ -11,15 +10,6 @@ public class CustomerDTO
     private String avatarImage;
 
     public CustomerDTO() {
-    }
-
-    public CustomerDTO(Long id, String code, String name, String status, String groupName, String avatarImage) {
-        this.id = id;
-        this.code = code;
-        this.name = name;
-        this.status = status;
-        this.groupName = groupName;
-        this.avatarImage = avatarImage;
     }
 
     public Long getId() {
@@ -69,4 +59,5 @@ public class CustomerDTO
     public void setAvatarImage(String avatarImage) {
         this.avatarImage = avatarImage;
     }
+
 }
