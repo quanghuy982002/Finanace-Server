@@ -33,32 +33,43 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public ResponseEntity<?> createRole(RoleRequest request) {
+        if(repository.existsByCode(request.getCode())){
+            return new ResponseEntity<>("Code is already in use by another role", HttpStatus.BAD_REQUEST);
+        }
         Role newRole = new Role();
         newRole.setCode(request.getCode());
         newRole.setRoleProject(request.getRoleProject());
         newRole.setRoleTitle(request.getRoleTitle());
         newRole.setStatus(request.getStatus());
         this.repository.save(newRole);
-        return new ResponseEntity<>(newRole,HttpStatus.OK);
-    }
-    @Override
-    public ResponseEntity<?> updateRole(Integer id, RoleRequest request) {
-        if(repository.existsById(id)){
-            Role newRole = new Role();
-            newRole = repository.findById(id).get();
-            newRole.setCode(request.getCode());
-            newRole.setRoleProject(request.getRoleProject());
-            newRole.setRoleTitle(request.getRoleTitle());
-            newRole.setStatus(request.getStatus());
-            this.repository.save(newRole);
-            return new ResponseEntity<>(newRole,HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(newRole, HttpStatus.OK);
     }
 
     @Override
+    public ResponseEntity<?> updateRole(Integer id, RoleRequest request) {
+        Role existingRole = repository.findById(id).orElse(null);
+        
+        if (existingRole != null) {
+            Role roleWithSameCode = repository.findByCode(request.getCode());
+            if (roleWithSameCode != null && !roleWithSameCode.getId().equals(id)) {
+                return new ResponseEntity<>("Code is already in use by another role", HttpStatus.BAD_REQUEST);
+            }
+            
+            existingRole.setCode(request.getCode());
+            existingRole.setRoleProject(request.getRoleProject());
+            existingRole.setRoleTitle(request.getRoleTitle());
+            existingRole.setStatus(request.getStatus());
+            
+            repository.save(existingRole);
+            return new ResponseEntity<>(existingRole, HttpStatus.OK);
+        }
+        
+        return new ResponseEntity<>("Role not found", HttpStatus.NOT_FOUND);
+    }
+    
+    @Override
     public ResponseEntity<?> deleteRole(Integer id) {
-        if(repository.existsById(id)){
+        if (repository.existsById(id)) {
             repository.deleteById(id);
             return new ResponseEntity<>("Removed", HttpStatus.OK);
         }
@@ -67,6 +78,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public ResponseEntity<?> getStaffsByRoleId(Integer id) {
+        if (!repository.existsById(id)) {
+            return new ResponseEntity<>("Not found", HttpStatus.NOT_FOUND);
+        }
         Role role = repository.findById(id).get();
         List<Staff> staffs = staffRepository.getStaffByRole(role);
         return new ResponseEntity<>(staffs, HttpStatus.OK);
@@ -74,7 +88,10 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public ResponseEntity<?> getRoleById(Integer id) {
-        return new ResponseEntity<>(repository.findById(id).get(),HttpStatus.OK);
+        if (!repository.existsById(id)) {
+            return new ResponseEntity<>("Not found", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(repository.findById(id).get(), HttpStatus.OK);
     }
 
     @Override

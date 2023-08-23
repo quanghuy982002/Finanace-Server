@@ -16,4 +16,5 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
     @Query("SELECT r FROM Role r WHERE (:#{#request.code} IS NULL OR r.code LIKE %:#{#request.code}%)" )
     Page<Role> searchRole(@Param("request") RoleSearchRequest request, Pageable pageable);
 
+    Role findByCode(String code);
 }
