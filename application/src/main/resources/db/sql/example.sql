@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS `example` (
     deleted_by VARCHAR(255) DEFAULT NULL,
     deleted_time DATETIME DEFAULT NULL,
     PRIMARY KEY (id)
-    );
+);
