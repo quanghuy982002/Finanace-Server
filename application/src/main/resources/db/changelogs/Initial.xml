@@ -45,4 +45,45 @@
         </addColumn>
     </changeSet>
 
+<!--    db khai va minh-->
+    <changeSet id="20230824.4379" author="khaibui">
+        <sql>
+            CREATE TABLE `role`(
+                                   `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                   `code` VARCHAR(100) NOT NULL,
+                                   `role_title` VARCHAR(100) NOT NULL,
+                                   `role_project` VARCHAR(100) NOT NULL,
+                                   `status` TINYINT(1) NOT NULL
+            );
+            CREATE TABLE `department`(
+                                         `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                         `name` VARCHAR(100) NOT NULL
+            );
+            ALTER TABLE
+                `role` ADD UNIQUE `role_code_unique`(`code`);
+            CREATE TABLE `staff`(
+                                    `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                    `code` VARCHAR(100) NOT NULL,
+                                    `name` VARCHAR(100) NOT NULL,
+                                    `email` VARCHAR(100) NOT NULL,
+                                    `picture` VARCHAR(255) NULL,
+                                    `department` BIGINT NOT NULL,
+                                    `status` TINYINT(1) NOT NULL,
+                                    `role` BIGINT NOT NULL
+            );
+            ALTER TABLE
+                `staff` ADD UNIQUE `staff_code_unique`(`code`);
+            ALTER TABLE
+                `staff` ADD UNIQUE `staff_email_unique`(`email`);
+            ALTER TABLE
+                `staff` ADD CONSTRAINT `staff_department_foreign` FOREIGN KEY(`department`) REFERENCES `department`(`id`);
+            ALTER TABLE
+                `staff` ADD CONSTRAINT `staff_role_foreign` FOREIGN KEY(`role`) REFERENCES `role`(`id`);
+        </sql>
+    </changeSet>
+    <changeSet id="20230823.6472" author="khaibui">
+        <addColumn tableName="staff">
+            <column name="created_time" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
