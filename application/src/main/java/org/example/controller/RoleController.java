@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.dto.PageResponse;
-import org.example.dto.Response;
 import org.example.entity.Role;
 import org.example.request.role.RoleRequest;
 import org.example.request.role.RoleSearchRequest;
