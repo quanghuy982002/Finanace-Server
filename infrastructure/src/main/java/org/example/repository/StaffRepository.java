@@ -1,5 +1,8 @@
 package org.example.repository;
 
+import java.util.List;
+
+import org.example.entity.Role;
 import org.example.entity.Staff;
 import org.example.request.staff.StaffSearchRequest;
 import org.springframework.data.domain.Page;
@@ -26,6 +29,8 @@ public interface StaffRepository extends JpaRepository<Staff, Integer> {
 //    Page<Staff> searchByName(@Param("request") String name, Pageable pageable);
 //    @Query("SELECT s FROM Staff s WHERE s.email like  %:#{#request.email}% ")
 //    Page<Staff> searchByEmail(@Param("request") String email, Pageable pageable);
+
+    List<Staff> getStaffByRole(Role role);
 
 
 }

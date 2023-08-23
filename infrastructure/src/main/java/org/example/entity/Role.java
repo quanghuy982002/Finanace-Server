@@ -1,9 +1,12 @@
 package org.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -26,7 +29,12 @@ public class Role {
 
     @Column(name = "status", nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean status;
+
     @JsonBackReference
     @OneToMany(mappedBy = "id")
     private List<Staff> staff;
+
+    @CreatedDate
+    @Column(name = "created_time", nullable = false, insertable = false)
+    private LocalDateTime createdTime;
 }

@@ -86,4 +86,9 @@
             <column name="created_time" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </addColumn>
     </changeSet>
+    <changeSet id="20230823.01" author="minh">
+        <addColumn tableName="role">
+            <column name="created_time" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
