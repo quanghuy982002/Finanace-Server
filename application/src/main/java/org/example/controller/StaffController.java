@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/staff")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class StaffController {
     private final StaffServiceImpl service;
 

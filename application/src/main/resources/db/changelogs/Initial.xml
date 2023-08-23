@@ -91,4 +91,10 @@
             <column name="created_time" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </addColumn>
     </changeSet>
+    <changeSet id="20230823.02" author="minh">
+        <sqlFile path="/db/sql/role.sql"/>
+    </changeSet>
+    <changeSet id="20230823.03" author="minh">
+        <sqlFile path="/db/sql/staff.sql"/>
+    </changeSet>
 </databaseChangeLog>
