@@ -41,7 +41,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public ResponseEntity<?> insertStaff(StaffRequest request) {
-        if (repository.existsByCode(request.getCode())) {
+        if (repository.existsByCode(request.getCode()) || repository.existsByEmail(request.getCode())) {
             return new ResponseEntity<>("existed", HttpStatus.BAD_REQUEST);
         }
         Staff staff = new Staff();

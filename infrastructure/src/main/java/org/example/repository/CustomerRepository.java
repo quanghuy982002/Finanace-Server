@@ -17,3 +17,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             " AND (:#{#request.name} IS NULL OR c.name LIKE %:#{#request.name}%)")
     Page<Customer> searchCustomerByCodeAndName(@Param("request") CustomerSearchRequest request, Pageable pageable);
 }
+
+
