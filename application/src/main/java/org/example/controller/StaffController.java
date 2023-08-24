@@ -65,7 +65,7 @@ public class StaffController {
         List<StaffDTO> staffs = service.getStaffs();
 
         Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("Customers");
+        Sheet sheet = workbook.createSheet("Staffs");
 
         Row headerRow = sheet.createRow(0);
         headerRow.createCell(0).setCellValue("ID");
@@ -93,7 +93,7 @@ public class StaffController {
         ByteArrayResource resource = new ByteArrayResource(outputStream.toByteArray());
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=customers.xlsx")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=staff.xlsx")
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .contentLength(resource.contentLength())
                 .body(resource);
